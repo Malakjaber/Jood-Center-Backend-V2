@@ -10,7 +10,7 @@ const router = express.Router();
 router.get(
   "/:id",
   authenticate,
-  authorize(["admin", "teacher"]),
+  authorize(["manager", "teacher"]),
   getClassesByTeacherId
 );
 

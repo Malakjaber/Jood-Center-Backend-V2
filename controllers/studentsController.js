@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { student } = require("../models");
+const { student, report } = require("../models");
 const { sequelize } = require("../models");
 
 const getAllStudents = async (req, res) => {
@@ -170,12 +170,24 @@ const removeStudent = async (req, res) => {
   try {
     const id = req.params.id;
 
-    const deletedStudent = await student.destroy({
+    const existingReports = await report.findAll({
       where: { st_id: id },
     });
-    if (deletedStudent === 0) {
+
+    if (existingReports.length > 0) {
+      await report.destroy({
+        where: { st_id: id },
+      });
+    }
+
+    const deletedStudentCount = await student.destroy({
+      where: { st_id: id },
+    });
+
+    if (deletedStudentCount === 0) {
       return res.status(404).json({ error: "Student Not Found" });
     }
+
     res.json({ message: "success", st_id: id });
   } catch (error) {
     console.error(error);

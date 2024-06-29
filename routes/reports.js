@@ -12,7 +12,7 @@ router.get("/", authenticate, getReports);
 router.post(
   "/",
   authenticate,
-  authorize(["admin", "teacher"]),
+  authorize(["manager", "teacher"]),
   async (req, res) => {
     const { content, date, st_id, teacher_id } = req.body;
     const result = await createReport(content, date, st_id, teacher_id);

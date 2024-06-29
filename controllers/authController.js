@@ -89,32 +89,4 @@ const signIn = async (req, res) => {
   }
 };
 
-// const signOut = async (req, res) => {
-//   try {
-//     const sessionId = req.headers.authorization;
-
-//     const oldSession = await session.findOne({
-//       where: { sid: sessionId },
-//     });
-
-//     if (!oldSession) {
-//       return res.status(404).json({ error: "Session ID not found" });
-//     }
-
-//     // log out from current session
-//     const deletedSessions = await session.destroy({
-//       where: { sid: sessionId },
-//     });
-
-//     if (deletedSessions === 0) {
-//       return res.status(404).json({ error: "Session ID not found" });
-//     }
-
-//     res.json({ message: "success" });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// };
-
 module.exports = { signUp, signIn };

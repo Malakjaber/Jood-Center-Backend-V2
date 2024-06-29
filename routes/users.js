@@ -7,7 +7,7 @@ const { authenticate, authorize } = require("../middlewares/auth.js");
 
 const router = express.Router();
 
-router.get("/", authenticate, authorize(["manager"]), getAllUsers); // Example: Only admin and manager can get all users
-router.get("/:id", authenticate, getUserById); // Example: Any authenticated user can get user by ID
+router.get("/", authenticate, authorize(["manager"]), getAllUsers);
+router.get("/:id", authenticate, getUserById);
 
 module.exports = router;
